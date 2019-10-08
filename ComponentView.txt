@@ -1,0 +1,23 @@
+﻿1. Tạo thư mục Components hoặc ViewComponents (hoặc tên tùy ý) để định nghĩa phần dữ liệu
+a/ Tạo các class kế thừa từ ViewComponent
+Ví dụ: 
+public class CategoryMenu : ViewComponent{}
+hoặc:
+public class CategoryMenuViewComponent : ViewComponent{}
+
+b/ Khai báo Dependency Injection (DI) nếu có
+c/ Định nghĩa hàm InvokeAsync
+	public IViewComponentResult Invoke(){}
+hoặc:
+	public async Task<IViewComponentResult> InvokeAsync(){}
+	
+2. Trong thư mục Views/Shared tạo thư mục Components
+- Trong thư mục Components tạo folder trùng tên class
+- Tạo view Default.cshtml
+Định nghĩa phần nội dung View cần hiển thị
+
+3. Nhúng component vào trong trang .cshtml
+@await Component.InvokeAsync("ten_view_component")
+
+nếu hàm Invoke() có tham số: public IViewComponentResult Invoke(int count = 10, string searchKey = ""){}
+thì gọi như sau: @await Component.InvokeAsync("ten_view_component", new { count = 10, searchKey = "NhatNghe" })
